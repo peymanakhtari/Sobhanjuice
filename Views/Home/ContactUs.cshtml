@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "ContactUs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<div class="container">
+
+    <div class="contactInfo">
+        <p>شماره تماس: <a href="tel://07136291210">07136291210</a></p>
+        <p> <a href="https://www.instagram.com/sobhan.freshjuice/"><i class="fa fa-instagram"></i>sobhan.freshjuice</a>
+            :اینستاگرام </p>
+        <p> <b style="font-weight: bolder">آدرس: </b> رحمت آباد، حدفاصل کوچه ۴۵ و ۴۷ قصر دشت، آبمیوه طبیعی سبحان </p>
+    </div>
+    <iframe id="map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2452.406502024016!2d52.51090604570949!3d29.626163079082566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fb213829ffdd9f3%3A0xdf90818d7b4e13bd!2z2KLYqNmF24zZiNmHINio2LPYqtmG24wg2LfYqNuM2LnbjCDYs9io2K3Yp9mG!5e0!3m2!1sen!2s!4v1660454109536!5m2!1sen!2s"
+        style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <br>
+    <div id="peyman"
+        style="width:300px;height:100px;box-shadow:0 0 0 8px #171717;border:4px solid #fafafa;background-color:#171717;border-radius:20px;margin: 20px auto 0 auto;font-size:16px; ">
+        <p style="color:white;text-align:center;margin-top:20px">Web developer : Peyman Akhtari</p>
+        <br>
+        <p style="color:white;text-align:center">peyman.firelance@gmail.com</p>
+    </div>
+    <br><br><br><br><br>
+</div>
+<script>
+     $(document).ready(function () {
+        // Handler for .ready() called.
+        var elem = getParameterByName('elem');
+        $('html, body').animate({
+            scrollTop: $('#'+elem).offset().top
+        }, 'fast');
+    });
+function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+
+
+</script>

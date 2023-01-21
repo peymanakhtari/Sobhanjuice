@@ -1,0 +1,63 @@
+﻿@model List<SobhanJuice.Models.OrderModel>
+@using SobhanJuice.Utilities
+
+@{
+    ViewData["Title"] = "Orders";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+    var utility=new Utility();
+}
+
+<div dir="rtl" class="col-12 col-md-9 mt-5 ms-3" style="border: 2px;">
+<a href="@Url.Action("Orders","AdminOrders",new {from=DateTime.Now.ChangeTime(0,0,0) ,until=DateTime.Now})" class="btn btn-warning">امروز @utility.DateBuilder(DateTime.Now.ToShamsi())</a>
+<a href="@Url.Action("Orders","AdminOrders",new {from=DateTime.Now.AddDays(-1).ChangeTime(0,0,0),until=DateTime.Now})" class="btn btn-info">دیروز</a>
+<a href="@Url.Action("Orders","AdminOrders",new {from=DateTime.Now.AddDays(-3).ChangeTime(0,0,0),until=DateTime.Now})" class="btn btn-primary">سه روز پیش</a>
+<form class="ms-5" style="display: inline-block;" action="/AdminOrders/orders" method="post">
+    <label for="from">از تاریخ : </label>
+    <input id="from" name="from" class="mx-2" type="date">
+    <label  for="until">تا تاریخ : </label>
+    <input id="until" name="until" class="mx-2" type="date">
+    <input class="btn btn-primary" type="submit" value="اعمال">
+</form>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                 <th>کد</th>
+                <th>تاریخ</th>
+                <th style="width: 4rem;"> ساعت</th>
+                <th>موبایل</th>
+                <th>نام</th>
+                <th>آدرس</th>
+                <th>پیک</th>
+                <th>ظرف</th>
+                <th>تخفیف</th>
+                <th>مجموع</th>
+                <th>محصولات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Order.ID</td>
+                    <td>@utility.DateBuilder(item.Order.DateTime.ToShamsi())</td>
+                    <td>@utility.TimeBuilder(item.Order.DateTime.ToShamsi())</td>
+                    <td>@item.Order.User.Mobile</td>
+                    <td>@item.Order.User.Name</td>
+                    <td>@item.Address.Text</td>
+                    <td>@item.Order.DeliveryPrice</td>
+                    <td>@(item.Order.BoxPrice)</td>
+                    <td>@item.Order.Discount</td>
+                    <td>@item.Order.TotalPrice</td>
+                    <td> 
+                    @foreach (var product in item.Details)
+                    {
+                        <button style="background-color: green;color: white;border-radius: 4px;padding: 6px;margin: 2px;border: 0px;">@product.Product.Name  @product.Count</button>
+                         
+                    }
+                    </td>
+                  </tr>
+            }
+           
+        </tbody>
+    </table>
+</div>

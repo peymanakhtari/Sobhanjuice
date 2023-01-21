@@ -1,0 +1,52 @@
+﻿@using SobhanJuice.Models
+
+@{
+    ViewData["Title"] = "EditOrder";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+    var orderProducts = (List<OrderDetailViewModel>)ViewBag.orderProducts;
+}
+
+<div dir="rtl" class="col-12 col-md-8 mt-5 ms-3">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>نام محصول </th>
+                <th>قیمت</th>
+                <th>تعداد</th>
+            </tr>
+        </thead>
+        <tbody>
+            <form action="/AdminOrders/EditOrder" method="post">
+            <input type="text" name="orderId" value="@ViewBag.orderId" hidden>
+            <input type="text" name="userId" value="@ViewBag.userId" hidden>
+            <input type="submit" class="btn btn-success" value="ویرایش" >
+            @foreach (var item in (List<Product>)ViewBag.products)
+            {
+
+                if (orderProducts.Any(c => c.Product.ID == item.ID))
+                {
+
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.FinalPrice</td>
+                        <td style="background-color: green;"> <input type="number" name="@item.ID" value="@orderProducts.Where(c=>c.Product.ID==item.ID).First().Count"> </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.FinalPrice</td>
+                        <td> <input type="number"  name="@item.ID" value="0"> </td>
+                    </tr>
+                }
+
+
+
+            }
+
+       </form>
+        </tbody>
+    </table>
+    
+</div>

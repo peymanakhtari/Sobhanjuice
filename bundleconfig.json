@@ -1,0 +1,44 @@
+[
+  {
+    "outputFileName": "wwwroot/cdn/bootstrap.min.css",
+    "inputFiles": [
+      "wwwroot/cdn/bootstrap.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/cdn/bootstrap.min.js",
+    "inputFiles": [
+      "wwwroot/cdn/bootstrap.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/cdn/jquery.min.js",
+    "inputFiles": [
+      "wwwroot/cdn/jquery.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/cdn/fontawesome.min.css",
+    "inputFiles": [
+      "wwwroot/cdn/fontawesome.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/cdn/slick.min.css",
+    "inputFiles": [
+      "wwwroot/cdn/slick.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/cdn/fontawesome.min.js",
+    "inputFiles": [
+      "wwwroot/cdn/fontawesome.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/cdn/slick.min.js",
+    "inputFiles": [
+      "wwwroot/cdn/slick.js"
+    ]
+  }
+]

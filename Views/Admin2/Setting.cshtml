@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Setting";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div dir="rtl" class="col-12 col-md-9 mt-5 ">
+    <form action="/Admin2/OpenHour" class="w-25 d-inline-block ms-4" method="post">
+        <div class="form-group">
+            <label class="control-label">تایم باز کردن ساعت </label>
+            <input type="number" autocomplete="off" name="OpenTimeH" value="@ViewBag.OpenTimeH" class="form-control" />
+        </div><br>
+        <div class="form-group">
+            <label class="control-label"> تایم باز کردن دقیقه</label>
+            <input type="number" autocomplete="off" name="OpenTimeM" value="@ViewBag.OpenTimeM" class="form-control" />
+        </div><br>
+        <div class="form-group">
+            <label class="control-label">تایم باز کردن جمعه ساعت </label>
+            <input type="number" autocomplete="off" name="OpenTimeFridayH" value="@ViewBag.OpenTimeFridayH"
+                class="form-control" />
+        </div><br>
+        <div class="form-group">
+            <label class="control-label"> تایم باز کردن جمعه دقیقه</label>
+            <input type="number" autocomplete="off" name="OpenTimeFridayM" value="@ViewBag.OpenTimeFridayM"
+                class="form-control" />
+        </div><br>
+        <div class="form-group">
+            <label class="control-label"> تایم بستن ساعت</label>
+            <input type="number" autocomplete="off" name="CloseTimeH" value="@ViewBag.CloseTimeH"
+                class="form-control" />
+        </div><br>
+        <div class="form-group">
+            <label class="control-label"> تایم بستن دقیقه</label>
+            <input type="number" autocomplete="off" name="CloseTimeM" value="@ViewBag.CloseTimeM"
+                class="form-control" />
+        </div><br>
+        <input type="submit" class="btn btn-success w-100" value="ثبت">
+    </form>
+
+    <form action="/Admin2/Delivery" class="w-25 d-inline-block ms-5 " method="post">
+        <div class="form-group">
+            <label class="control-label">حداقل مسافت</label>
+            <input type="number" autocomplete="off" name="MinServiceArea" value="@ViewBag.MinServiceArea"
+                class="form-control" />
+        </div><br>
+        <div class="form-group">
+            <label class="control-label">حداکثر مسافت</label>
+            <input type="number" autocomplete="off" name="MaxServiceArea" value="@ViewBag.MaxServiceArea"
+                class="form-control" />
+        </div><br>
+        <div class="form-group">
+            <label class="control-label">حداقل قیمت</label>
+            <input type="number" autocomplete="off" name="MinDelivery" value="@ViewBag.MinDelivery"
+                class="form-control" />
+        </div><br>
+        <div class="form-group">
+            <label class="control-label">حداکثر قیمت</label>
+            <input type="number" autocomplete="off" name="MaxDelivery" value="@ViewBag.MaxDelivery"
+                class="form-control" />
+        </div><br>
+        <input type="submit" class="btn btn-success w-100" value="ثبت"><br><br><br><br>
+        @if (ViewBag.TemporayClose == 0)
+        {
+            <a class="btn btn-success w-100" href="/Admin2/CloseOpenShop/@ViewBag.TemporayClose">مغازه باز </a>
+        }
+        else
+        {
+            <a class="btn btn-danger w-100" href="/Admin2/CloseOpenShop/@ViewBag.TemporayClose">مغازه بسته</a>
+        }<br><br>
+        @if (ViewBag.DeliveryService == 1)
+        {
+            <a class="btn btn-success w-100" href="/Admin2/DeliveryService/@ViewBag.DeliveryService">ارسال به محل</a>
+        }
+        else
+        {
+            <a class="btn btn-danger w-100" href="/Admin2/DeliveryService/@ViewBag.DeliveryService">عدم ارسال</a>
+
+        }
+    </form>
+    <form action="/Admin2/minFaktorPrice" class="w-25 d-inline-block ms-5 " method="post">
+        <div class="form-group">
+            <label class="control-label">حداقل قیمت فاکتور</label>
+            <input type="number" autocomplete="off" name="minFaktorPrice" value="@ViewBag.minFaktorPrice"
+                class="form-control" />
+        </div><br>
+         <input type="submit" class="btn btn-success w-100" value="ثبت حداقل قیمت فاکتور">
+    </form>
+    <br><br><br><br><br>
+</div>

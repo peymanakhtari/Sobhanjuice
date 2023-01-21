@@ -1,0 +1,1070 @@
+﻿/* --------------------------- */
+#logo{
+    width: 6rem;
+}
+.navbar-brand{
+   padding: 0;
+}
+.deliveryPickup{
+    background-color: #006300 !important;
+}
+.btn-success{
+    background-color: #236923;
+}
+.btn-success:hover{
+    background-color: #236923;
+}
+.btn-outline-success:hover{
+    background-color: #006300;
+}
+.btn-outline-success{
+    color: #006300;
+}
+.bg-success{
+    background-color: #236923 !important;
+}
+.text-success{
+    color: #236923 !important;
+}
+.top-bar {
+    background-color: #3c7a31;
+    padding-right: .75rem;
+    font-family: shabnam-bold;
+    color: rgb(252, 244, 230);
+    text-align: right;
+    width: 100%;
+    padding: .5rem .375rem .5rem .375rem;
+}
+
+.navbar-toggler {
+    font-size: small;
+    box-shadow: 1px 1px 1px black;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    outline: 1px;
+    box-shadow: none;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: rgb(14, 14, 14);
+}
+
+.nav-item:hover {
+    color: #3c7a31;
+}
+
+.pageFoot {
+    height: 7rem;
+    width: 100%;
+    z-index: 1;
+    /* box-shadow: 1px 1px 1px; */
+}
+
+.pageFootItem {
+    /* height: 6rem !important; */
+    background-size: 4.375rem;
+    background-repeat: no-repeat;
+    font-family: 'Shabnam-Bold';
+    font-size: .75rem;
+    text-align: center;
+}
+
+.pageFootItem.slick-current {
+    font-family: 'Shabnam-Bold';
+    font-size: 16px;
+    height: 5.625rem !important;
+}
+
+.pageFootItem.slick-current p {
+    background-color: #007c00;
+    color: white;
+}
+
+.pageFootItem img {
+    margin: .3rem auto .3rem auto;
+    width: 2.2rem;
+}
+
+.pageFootItem p {
+    margin-top: 1rem;
+    background-color: rgb(90, 165, 90);
+    color: white;
+    padding: 8px 2px;
+    border-radius: 4px;
+}
+
+.img-text {
+    border: 1px solid #2b2b2b;
+    border-radius: .15rem;
+    margin: .12rem;
+    height: 3.4rem;
+    /* box-shadow: .125rem .125rem .25rem #5f5f5f; */
+}
+
+.pageContent,
+.pageContentItem {
+    width: 100%;
+}
+
+.pageContentItem ul {
+    width: 61rem;
+    text-align: right;
+    margin: auto;
+    border: none;
+}
+
+.pageContentItem ul li {
+    position: relative;
+    border: 1px solid #a3a2a2;
+    border-radius: .2rem;
+    width: 18rem;
+    background-color: transparent;
+    display: inline-block;
+    margin-top: 1rem;
+    margin-right: 2rem;
+}
+
+.product {
+    display: block;
+}
+
+.product img {
+    width: 6rem;
+    margin: .2rem;
+    border-radius: 4px;
+}
+
+.product h3 {
+    display: inline-block;
+    font-size: 1rem;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    margin: .25rem .25rem 0 0;
+    color: black;
+}
+
+.product-description {
+    display: inline-block;
+    font-size: 14px;
+    position: absolute;
+    top: 40px;
+    right: 4px;
+    margin: .25rem .25rem 0 0;
+    color: #525252;
+    font-weight: lighter !important;
+}
+
+.product-price {
+    display: inline-block;
+    font-size: 14px;
+    position: absolute;
+    top: 60px;
+    right: 4px;
+    margin: .25rem .25rem 0 0;
+    color: #525252;
+    font-weight: lighter !important;
+}
+
+.discount {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    color: white;
+    background-color: #ad1c1c;
+    padding: 10px 4px 6px 4px;
+    border-radius: 50%;
+    font-size: .9rem;
+}
+
+.price-without-discount {
+    text-decoration: line-through;
+    text-decoration-color: #ad1c1c;
+    position: absolute;
+    bottom: 42px;
+    right: 4px;
+    color: #525252;
+    font-size: 14px;
+}
+
+.product-addItem-runout-button:hover span {
+    display: none
+}
+
+.product-addItem-runout-button:hover:before {
+    content: "ناموجود";
+}
+
+.addFirst-mainPage {
+    display: inline-block;
+    font-size: 14px;
+    position: absolute;
+    bottom: 4px;
+    right: 6.4rem;
+    width: 5rem;
+    height: 2rem;
+    border: none;
+    border-radius: 1px;
+    color: white;
+}
+
+.addFirst-mainPage:hover {
+    box-shadow: 0px 0px 2px inset #78db74;
+}
+
+.addFirst-mainPage:focus {
+    outline: none;
+}
+
+.addItem-mainPage {
+    position: absolute;
+    bottom: 2px;
+    right: 8px;
+    border: none;
+    background: transparent;
+}
+
+.addItem-mainPage:focus {
+    outline: none;
+}
+
+.LowOff-mainPage {
+    position: absolute;
+    bottom: 2px;
+    right: 65px;
+    background: transparent;
+    border: none;
+}
+
+.LowOff-mainPage:focus {
+    outline: none;
+}
+
+.addItem-basket {
+    border: none;
+    background: transparent;
+    position: absolute;
+    left: 60px;
+    bottom: 1rem;
+}
+
+.LowOff-basket {
+    border: none;
+    background: transparent;
+    position: absolute;
+    right: 44px;
+    bottom: 1rem;
+}
+
+.basket-table-container {
+    max-width: 300px;
+    margin: auto;
+}
+
+.basket-table {
+    border-radius: 70px;
+    text-align: right;
+}
+
+.fa-plus {
+    margin: 0 8px 2px 0;
+    border: 1px solid #AF2828;
+    border-radius: 4px;
+    padding: 4px;
+    color: #AF2828;
+    font-size: 16px;
+}
+
+.fa-minus {
+    margin: 0 2px 1px 0;
+    border: 1px solid #AF2828;
+    border-radius: 4px;
+    padding: 3px 4px;
+    color: #AF2828;
+    font-size: 18px;
+}
+
+.radius {
+    border-radius: 30%;
+}
+
+.editCount-mainPage {
+    display: none;
+    background: transparent;
+    width: 105px;
+    height: 40px;
+    position: absolute;
+    bottom: 2px;
+    right: 84px;
+}
+
+.count-mainPage {
+    position: absolute;
+    bottom: 4px;
+    right: 42px;
+    font-family: 'bkoodakbold';
+    font-size: 18px;
+    border-radius: 4px;
+    color: white;
+    padding: 6px 6px 2px 6px;
+
+}
+
+.pageContentItem.slick-current {
+    height: auto;
+    text-align: center;
+}
+
+.menu-card {
+    border: .125rem solid black;
+    padding: 0%;
+    height: 9rem;
+    border-radius: .3125rem;
+    margin-top: .625rem;
+    display: inline-block;
+}
+
+.menu-card img {
+    height: 8.75rem;
+    display: inline-block;
+    position: absolute;
+    left: 0%;
+}
+
+.menu-card h3 {
+    display: inline-block;
+    font-size: 1.1875rem;
+    font-family: 'B Homa';
+    position: absolute;
+    top: 0%;
+    right: 0;
+    margin: .25rem .25rem 0 0;
+}
+
+#pickup {
+    font-family: Shabnam-Bold;
+}
+
+#pickup a {
+    margin: auto 1vw;
+}
+
+#pickup div {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 1pt 1pt 5pt 1pt inset rgb(89, 158, 61);
+}
+
+.btn-basket {
+    width: 5rem;
+    height: 3rem;
+    color: black;
+    position: fixed;
+    bottom: 1.9rem;
+    right: 1.5rem;
+    border-radius: .5rem;
+    padding: .5rem 0;
+    text-align: center;
+}
+
+.price-basket {
+    padding: 22px 0 !important;
+}
+
+.edit-count-basket {
+    position: relative;
+    width: 80px;
+}
+
+.badge-basket {
+    font-size: 1rem;
+    padding: 5px;
+    position: absolute;
+    right: 24px;
+    bottom: 18px;
+}
+
+.basket-count {
+    background-color: red;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    top: -12px;
+    left: 3px;
+    position: absolute
+}
+
+.shopping-basket {
+    width: 3.5rem;
+    padding-left: 16px !important;
+    padding-top: 10px !important;
+    height: 3.5rem;
+}
+
+.fa-basket-shopping {
+    font-size: 1.9rem !important;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.remove-basket {
+    padding-right: 1rem;
+    width: 280px;
+    text-align: right;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+.continue-shopping {
+    padding-right: 1rem;
+    width: 280px;
+    margin: auto;
+    text-align: right;
+    margin-top: 1rem;
+}
+
+.ShopIsClose {
+    text-align: right;
+    line-height: 1.3rem;
+    background-color: #006300;
+    font-family: Iranian Sans;
+    color: white;
+    border-radius: 4px;
+    padding: 7px;
+    font-size: .95rem;
+}
+
+.insert-mobile p {
+    font-size: 1rem;
+    color: rgb(12, 12, 12);
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.insert-mobile button {
+    float: right;
+    margin-top: 8px;
+    padding: 6px 2rem;
+}
+
+#getConfirmationcode p {
+    text-align: right;
+    margin-bottom: 1.2rem;
+    color: #0d0d0d;
+    font-size: 1.2rem
+}
+
+#getConfirmationcode input {
+    width: 6rem;
+    float: right;
+    margin-right: 1rem
+}
+
+.total-price {
+    width: 280px;
+    margin: auto;
+    padding-right: 1rem;
+}
+
+.total-price p {
+    text-align: right;
+    font-size: 1rem !important;
+    padding-top: 1rem;
+    color: rgb(12, 12, 12) !important;
+    font-weight: bold;
+}
+
+.btn-connect-to-asanpardakht {
+    font-weight: bolder;
+    position: absolute;
+    width: 265px;
+    height: 3.5rem;
+    left: 55%;
+    -ms-transform: translate(-60%, -50%);
+    transform: translate(-60%, -50%);
+}
+
+.username {
+    border: 1px black solid !important;
+}
+
+.btn-connect-to-asanpardakht img {
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 50px;
+}
+
+.btn-connect-to-asanpardakht p {
+    position: absolute;
+    top: 1rem;
+    right: 8px;
+}
+
+.btn-connect-to-asanpardakht:hover img {
+    display: none;
+}
+
+.walet-menu {
+    background-color: rgb(175, 40, 40);
+    height: 2.4rem;
+    border-radius: 3px;
+    margin-right: 4px;
+    padding: 10px 6px 0 6px;
+    font-size: .9rem;
+}
+
+.logout {
+    background-color: rgb(151, 0, 0);
+    color: white;
+    padding: 2px 14px 8px 15px;
+    border-radius: 4px;
+}
+
+.logout:hover {
+    color: white !important;
+    background-color: rgb(206, 41, 41) !important;
+}
+
+.walet-menu span {
+    color: white;
+}
+
+
+.factorAddress {
+    line-height: 1.7rem;
+}
+
+.orders {
+    justify-content: center;
+    background-color: #4da150;
+    font-family: Shabnam-Bold;
+}
+
+.orders li button {
+    color: white;
+}
+
+.orders li button .active:hover {
+    border: none !important;
+}
+
+.order-history .card .card-header {
+    font-size: 1rem;
+    background-color: #1e661f;
+    color: white !important;
+    padding: 1rem;
+    font-family: Shabnam-Bold;
+    position: relative;
+}
+
+.card-footer {
+    font-family: 'Shabnam' !important;
+    font-weight: bold;
+    padding: 4px !important;
+}
+
+.footerContainer {
+    margin: 0px !important;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(240, 255, 238);
+    z-index: 4;
+    border-radius: 10px;
+    box-shadow: 1pt 1pt 5pt 1pt inset rgb(89, 158, 61);
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.footerContainer div {
+    padding: 8px;
+}
+
+#factorDetailTitle {
+    font-family: shabnam-bold;
+    font-size: 1.2rem;
+    color: #1e661f;
+}
+
+.order-status {
+    font-size: 1.1rem;
+    margin-top: 8px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.peyOrderDiff {
+    background-color: #de000f !important;
+}
+
+.order-time {
+    font-family: Shabnam;
+    font-size: 15px;
+}
+
+.call-shop {
+    font-family: shabnam-bold;
+    background-color: white;
+    color: #1E661F;
+    padding: 0px 5px;
+    border-radius: 5px;
+    margin-right: 5px;
+    text-decoration: none;
+}
+
+
+.order-history .card .card-footer {
+    background-color: #1e661f;
+    color: rgb(0, 0, 0) !important;
+    padding: 1.4rem;
+    font-family: Iranian Sans !important;
+}
+
+
+.order-history .card .card-block {
+    font-size: 14px;
+}
+
+.order-history .card .card-block p {
+    font-size: 14px;
+    margin-top: 9px;
+    margin-bottom: 5px;
+}
+
+.order-history .card .card-block h4 {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.order-history .card .card-block button {
+    font-size: .8rem;
+    padding: .5rem;
+    font-weight: bold;
+}
+
+.order-productList {
+    position: relative;
+}
+
+.noOrder {
+    text-align: center;
+    margin-top: 4rem;
+    font-family: shabnam-bold;
+    font-size: 1.3rem;
+}
+
+.AddToBasket-orders {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 75%;
+    background-color: rgb(255, 255, 236);
+    z-index: 2;
+    box-shadow: 2pt 2pt 12pt black;
+    display: none;
+    border-radius: 8px;
+    line-height: 1.2rem;
+    font-family: 'Shabnam';
+    font-size: .9rem;
+}
+
+.AddToBasket-orders p {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.dismisAddDialog {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    font-size: 16px;
+    border: none;
+    background-color: #1E661F;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 5px
+}
+
+.dismisAddDialog:hover {
+    background-color: #85ad85
+}
+
+.return-toIndex {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    font-size: 16px;
+    border: none;
+    background-color: #1E661F;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 5px
+}
+
+.return-toIndex:hover {
+    background-color: #85ad85;
+}
+
+.refresh-order {
+    background-color: white;
+    color: rgb(14, 14, 14);
+    position: absolute;
+    left: 12px;
+    padding: 12px;
+    top: 18px;
+    border-radius: 3px;
+}
+
+.refresh-order:hover {
+    background-color: rgb(80, 80, 80);
+    color: rgb(230, 230, 230);
+}
+
+.submit-comment {
+    margin-top: 1rem;
+}
+
+.submit-comment a {
+    text-decoration: none;
+    background-color: #b82135;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 3px;
+    transition: .6s;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.submit-comment a:hover {
+    background-color: #d19aa0;
+}
+
+.submit-comment a span {
+    color: #964853;
+    background-color: white;
+}
+
+.cmt-product {
+    display: flex;
+    font-family: shabnam-bold;
+}
+
+.cmt-product-cotent {
+    padding-right: 1rem;
+    text-align: right;
+}
+
+.cmt-product-cotent h2 {
+    font-size: 1.7rem;
+}
+
+.cmt-product-cotent p {
+    margin-top: 1rem;
+    color: rgb(85, 85, 85);
+    font-size: 1.1rem;
+    margin-left: 4px;
+}
+
+
+.cmt-product-image {
+    margin-left: 1rem;
+    max-height: 5rem;
+
+}
+
+.cmt-product-image img {
+    width: 100%;
+    border-radius: 4px;
+}
+
+.noDiscount-cmt {
+    text-decoration: line-through;
+    text-decoration-color: #964853;
+    margin-left: .6rem;
+}
+
+.card-comment {
+    margin-top: 1rem;
+    font-family: Iranian Sans;
+    float: right;
+}
+
+.card-comment .card-body .card-title {
+    font-weight: bold;
+}
+
+.card-comment .card-body {
+    background-color: rgb(245, 245, 245);
+}
+
+.card-comment .card-body .card-text {
+    line-height: 1.6;
+}
+
+.nazarat {
+    font-size: 1.9rem;
+    font-family: shabnam-bold;
+    text-align: right;
+}
+
+.cmt-discount {
+    background-color: #AD1C1C;
+    color: white;
+    border-radius: 47%;
+ 
+    float: right;
+    padding: 10px 4px 6px 4px;
+    padding-right: 2px;
+}
+
+.cmt-score {
+    margin-top: 8px;
+    float: right;
+    padding: 6px;
+    border: 1px solid orange;
+    border-radius: 7px;
+    font-size: 1.3rem;
+}
+
+.commentRate {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    margin-top: 0px;
+    padding: 8px 4px;
+    border: 1px solid orange;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-family: shabnam-bold;
+}
+
+.runout {
+    position: absolute;
+    top: 5px;
+    right: 7.5rem;
+    background-color: #1f1f1f;
+    color: rgb(255, 255, 255);
+    padding: 6px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+}
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+table tr:first-child td:first-child {
+    border-top-left-radius: 10px;
+}
+
+table tr:first-child td:last-child {
+    border-top-right-radius: 10px;
+}
+
+#map {
+    background: #eee;
+    width: 100%;
+    height: 100%;
+}
+
+#getLocation {
+    top: 0;
+    right: 0;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    font-family: Iranian Sans;
+    font-weight: bold;
+}
+
+#locationTopbar {
+    width: 100%;
+    height: 7rem;
+    background-color: rgb(255, 255, 255);
+    direction: rtl;
+    position: relative;
+}
+
+#locationMiddle {
+    height: calc(100% - 5rem);
+    padding: 0px 8px 12px 8px;
+}
+
+#btnConfirmLocation {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    width: 5rem;
+}
+
+#btnCloseMap {
+    position: absolute;
+    top: 8px;
+    right: 1rem;
+    width: 5rem;
+
+
+}
+
+#showDelivery {
+    left: 4px;
+    background-color: rgb(236, 236, 236);
+    font-size: 13px;
+    padding: 9px;
+    border-radius: 3px;
+    width: calc(100% - 7.5rem);
+    position: absolute;
+
+    left: 1rem;
+    text-align: center;
+    line-height: 1.2rem;
+    bottom: 1rem;
+}
+
+#currentGetLocation {
+    position: absolute;
+    top: 8px;
+    right: 6.5rem;
+}
+
+#btnGetLocation {
+    margin-bottom: 1rem;
+    font-weight: bolder;
+}
+
+#addressText {
+    float: right;
+    margin-top: 10px;
+    text-align: right;
+    line-height: 1.4rem;
+}
+
+#editeAddress {
+    margin-top: 4px;
+}
+
+.selectAddress option {
+    text-align: center;
+}
+
+.selectAddress {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-left: auto;
+    width: 70%;
+    min-width: 19rem;
+    text-align: right;
+}
+
+#locationAddress {
+    width: 100%;
+    height: 5rem;
+    background-color: rgb(255, 255, 255);
+    direction: rtl;
+    position: relative;
+}
+
+#locationAddress button {
+    padding: .9rem 0;
+}
+
+#locationAddress div {
+    padding: .8rem 5px;
+    margin-top: 1rem;
+    min-height: 3.5rem;
+    max-height: 3.5rem;
+}
+
+.Line {
+    width: 100%;
+    height: 1px;
+    background-color: black;
+}
+
+.factorTitle {
+    font-weight: bolder;
+    font-size: 20px;
+    font-family: shabnam;
+
+}
+
+.alert-success {
+    line-height: 1.5rem;
+}
+
+.btnReturn {
+    font-size: .8rem;
+}
+
+.swal2-popup {
+    font-family: shabnam;
+}
+
+#under-menu {
+    width: 100%;
+    height: 700px;
+    background-color: rgb(255, 255, 255);
+}
+.sappLink{
+    color: #FF00A6;
+}
+.UnderMenuContent{
+    margin: 2rem auto;
+    width: 85%;
+    max-width: 45rem;
+    background-color: rgb(211, 211, 211);
+    border-radius: 8px;
+    padding:1rem;
+}
+.UnderMenuContent h1{
+    text-align: center;
+    font-family: shabnam;
+    font-weight: bold;
+}
+.UnderMenuContent p{
+    text-align: right;
+    font-family: tahoma;
+    line-height: 1.4rem;
+}
+.loginForm{
+    font-family: Shabnam;
+}
+.loginForm input{
+    margin: 8px;
+}
+.loginForm button{
+    margin: 8px;
+}
+.validation-message {
+    color: red;
+}
+#map {
+height: 30rem;
+}
+.contactInfo{
+    margin-top: 4rem;
+    text-align: right;
+    font-family: tahoma;
+}
+.contactInfo p{
+    margin: 1rem;
+    line-height: 1.5rem;
+}
+.contactInfo i{
+    color: rgb(24, 24, 24);
+    font-size: 2rem;
+    margin-right: 3px;
+}

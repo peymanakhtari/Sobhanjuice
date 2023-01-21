@@ -1,0 +1,132 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+.menu-button {
+    width: 100%;
+    margin: 8px;
+}
+
+.admin-product p {
+    margin: 4px;
+    font-size: 1.2rem
+}
+
+.admin-product p span {
+    font-weight: bold
+}
+
+.categories a {
+    margin: 2px;
+    font-size: 1.2rem;
+}
+
+.categories {
+    margin-top: 1rem;
+}
+
+
+
+.NotConfirmedOrder div {
+    background-color: rgb(255, 230, 198);
+    padding: 8px;
+    margin: 3px;
+    border-radius: 3px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.NotConfirmedOrder {
+    border: 1px solid;
+    box-sizing: border-box;
+    padding: 14px 0;
+    margin: 4px;
+    border-radius: 6px;
+    background-color: #fcfcfd;
+
+}
+ .arrowtime{
+    background-color: green;
+    color: white;
+    padding: 5px 8px;
+    margin: 4px;
+    border-radius: 3px;
+}
+.arrowtime:hover{
+    background-color: chartreuse;
+}
+.orderProduct {
+    background-color: #e2dfff !important;
+}
+
+.ConfirmedOrder {
+    border: 1px solid;
+    box-sizing: border-box;
+    padding: 14px 0;
+    margin: 4px;
+    border-radius: 6px;
+    background-color: #fcfcfd;
+}
+
+.ConfirmedOrder div {
+    background-color: rgba(56, 56, 56, 0.856);
+    color: white;
+    padding: 8px;
+    margin: 3px;
+    border-radius: 3px;
+    display: inline-block;
+    font-weight: bold;
+}
+.orderProductConfirmed{
+    background-color: #211e42 !important;
+}
+.mapContainer{
+position: relative;
+width: 100%;
+height: 100%;
+}
+.mapContainer button{
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 3rem;
+}
+.mapdiv{
+    position: absolute;
+    width: 42rem;
+    height: 42rem;
+    background-color: white;
+    z-index: 10;
+    bottom: 0;
+    left: 0;
+    display: none;
+}
+#map{
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 3rem);
+    top: 3rem;
+    right: 0;
+}
+.orderid{
+    background-color: red;
+    color: white;
+    padding: 4px;
+    border-radius: 3px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 4px;
+}
+#newOrderAlarm{
+    border:4px solid red;
+    padding: 6rem 1rem;
+    border-radius: 8px;
+    background-color: red;
+    color: white;
+    margin-right: 8px;
+}
+#newOrderAlarm span{
+    font-weight: bolder;
+    font-size: 1.7rem;
+}

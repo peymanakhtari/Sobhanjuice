@@ -1,0 +1,72 @@
+﻿@using SobhanJuice.Models
+@model List<SobhanJuice.Models.Product>
+@{
+    ViewData["Title"] = "Products";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div class="main col-md-9">
+    <div class="categories ">
+        <a asp-action="AddOrEditProduct" asp-controller="Admin" class="btn btn-success">افزودن محصول</a>
+        <a class="btn btn-info">محصولات تخفیفدار </a>
+        <a href="/admin/productList" class="btn btn-primary">لیست محصولات  </a>
+        <a class="btn btn-warning" href=@Url.Action("Categories")>دسته بندی ها</a>
+        <br />
+        @foreach (var item in (List<Category>)ViewBag.categories)
+        {
+            if (ViewBag.CategoryId == item.ID)
+            {
+                <a href=@Url.Action("Products",new{CategoryId=item.ID}) class="btn btn-primary">@item.Name</a>
+            }
+            else
+            {
+                <a href=@Url.Action("Products",new{CategoryId=item.ID}) class="btn btn-secondary">@item.Name</a>
+            }
+        }
+
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="card-container col-6 col-xl-4">
+                <div class="card mb-3 mt-5 " style="max-width: 450px;">
+                    <div class="row g-0">
+                        @* <div class="col-5">
+                            <img style="height: 100%;" src="@System.Text.Encoding.Default.GetString(item.Picture)" class="img-fluid rounded-start " alt="...">
+                        </div> *@
+                        <div style="text-align: right;" class="col-7 text-right">
+                            <div class="card-body admin-product">
+                                <h5 class="card-title">@item.Name</h5>
+                                 <p dir="rtl" class="card-text"><span>@item.Sequence</span> ترتیب</p>
+                                <p dir="rtl" class="card-text"><span>@item.Discount</span> درصد تحفیف</p>
+                                <p dir="rtl" class="card-text"> <span>@item.FinalPrice</span> تومان</p>
+                                <button onclick="deleteProduct(@item.ID)" class="btn btn-danger m-1 ">حذف</button>
+                                @if (@item.Exist)
+                                {
+                                    <a href=@Url.Action("changeExistance",new{id=@item.ID}) class="btn btn-success"> موجود است</a>
+                                }
+                                else
+                                {
+                                    <a href=@Url.Action("changeExistance",new{id=@item.ID}) class="btn btn-danger"> موجود نیست</a>
+                                }
+                                <a href=@Url.Action("addorEditProduct",new{Id=item.ID}) class="btn btn-secondary mt-1">ویرایش</a>
+                                  <a href=@Url.Action("Comments","Admin",new{Id=item.ID}) class="btn btn-info mt-1">نظرات</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </div>
+
+
+</div>
+<script>
+function deleteProduct(id){
+    if(confirm('آیا محصول حذف شود؟')){
+        location.href='/Admin/DeleteProduct/'+id;
+    }
+}
+</script>

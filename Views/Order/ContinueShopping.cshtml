@@ -1,0 +1,236 @@
+﻿@using Microsoft.AspNetCore.Routing
+ّ@using SobhanJuice.Models
+@model List<OrderDetailViewModel>
+@{
+    ViewData["Title"] = "ContinueShopping";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<head>
+    <link href="https://static.neshan.org/sdk/leaflet/1.4.0/leaflet.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+    <link rel="stylesheet" href="dist/leaflet.awesome-markers.css">
+    <script src="https://static.neshan.org/sdk/leaflet/1.4.0/leaflet.js" type="text/javascript"></script>
+
+</head>
+
+<input type="text" value="@ViewBag.userid" hidden id="userid">
+<input type="text" value="@ViewBag.orderid" hidden id="orderid">
+<input type="number" value="@ViewBag.ActiveOrders" hidden id="ActiveOrders">
+<input type="number" value="@ViewBag.NoPeyment" hidden id="NoPeyment">
+<input value="@ViewBag.totalPrice" id="total_price" hidden />
+<input value="@ViewBag.minPrice" id="minPrice" hidden/>
+<h3 class="factorTitle mt-4 text-success  text-center">فاکتور سفارش
+</h3>
+<div style="font-family: shabnam" class="container  mx-auto mt-3">
+
+    <table dir="rtl" class="table">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">نام محصول</th>
+                <th scope="col">تعداد</th>
+                <th scope="col">قیمت </th>
+                <th scope="col">مجموع</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="price-format">
+                    <th>@(Model.IndexOf(item)+1)</th>
+                    <td>@item.Product.Name</td>
+                    <td>@item.Count</td>
+                    @if (item.Product.FinalPrice == item.Product.Price)
+                    {
+                        <td>@item.Product.FinalPrice</td>
+                    }
+                    else
+                    {
+                        <td>@item.Product.FinalPrice</td>
+                    }
+
+                    <td>@(item.Product.FinalPrice*item.Count)</td>
+                </tr>
+            }
+            <tr style="font-weight:bolder" class="price-format">
+                <th></th>
+                <td></td>
+                <td></td>
+                <td>مجموع</td>
+                <td>@ViewBag.productPrice</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <p class="factorTitle text-danger mt-1 ms-1 mb-1" style="font-size: 1rem;text-align: right;line-height: 1.2rem;">
+        کلیه قیمت ها در
+        فاکتور با در نظر گرفتن تخفیف می باشند</p><br>
+    <label style="float: right;" for="">شماره موبایل : @ViewBag.mobile</label>
+    <br><br>
+    @if (ViewBag.name != null)
+    {
+        <div dir="rtl">
+            <label for="">نام : </label>
+            <input id="username" onfocusout="AddUserName(this.value)" value="@ViewBag.name" name="username"
+            style="width: 9rem;display: inline-block;" type="text" class="form-control">
+        </div>
+    }
+    else
+    {
+        <div dir="rtl">
+            <label for="">نام : </label>
+            <input id="username" onfocusout="AddUserName(this.value)" name="username"
+            style="width: 9rem;display: inline-block;" type="text" class="form-control">
+        </div>
+    }
+
+
+    <br><br>
+    <div id="getLocation" style="display: none;">
+        <div id="locationAddress">
+            <button id="btnCloseMap" class="btn btn-danger" onclick="closeMap()">بستن</button>
+            <div id="showDelivery">
+                @ViewBag.AddressText
+            </div>
+
+        </div>
+        <div id="locationMiddle">
+            <div id="map" class="shadow "></div>
+        </div>
+    </div>
+  
+     <input id="deliveryService" type="text" value="@ViewBag.deliveryService" hidden>
+    <div class="w-100 text-center">
+        @if (ViewBag.pickup)
+        {
+            <button onclick="pickup(false)" class="btn btn-outline-success">ارسال به محل</button>
+            <button onclick="pickup(true)" class="btn btn-success">تحویل درب مغازه</button>
+            <input id="pickup" value="pickup" hidden />
+            <br><br>
+        }
+        else
+        {
+            <button onclick="pickup(false)" class="btn btn-success">ارسال به محل</button>
+            <button onclick="pickup(true)" class="btn btn-outline-success">تحویل درب مغازه</button>
+            <br><br>
+            <div class="w-100 mb-2" style="text-align:right;">
+                <a class="btn btn-primary" href="/User/addoreditaddress">افزودن آدرس جدید</a>
+            </div>
+        }
+
+    </div>
+
+    @if (ViewBag.addressStatus == "noAddressIsSubmited")
+    {
+        <div class="my-4" dir="rtl">
+            شما تا به حال آدرسی را ثبت نکرده اید
+        </div>
+
+    }
+    else if (ViewBag.addressStatus == "SelectAddress")
+    {
+        <select onchange="changeAddress(this)" dir="rtl" class="form-select selectAddress"
+        aria-label="Default select example">
+            <option value="0" selected="selected">آدرس خود را انتخاب کنید</option>
+            @foreach (var item in (List<Address>)ViewBag.addressList)
+            {
+                <option value="@item.ID">@item.Text</option>
+            }
+        </select>
+        <br>
+    }
+    else if (ViewBag.addressStatus == "AddressIsSelected")
+    {
+        <div dir="rtl" class="w-100 mb-2">آدرس: </div>
+        <select onchange="changeAddress(this)" dir="rtl" class="form-select selectAddress"
+        aria-label="Default select example">
+            <option value="0">آدرس خود را انتخاب کنید</option>
+            @foreach (var item in (List<Address>)ViewBag.addressList)
+            {
+                @if (ViewBag.CurrentAddress == @item.ID)
+                {
+                    <option selected="selected" value="@item.ID">@item.Text</option>
+                }
+                else
+                {
+                    <option value="@item.ID">@item.Text</option>
+                }
+
+            }
+        </select>
+        <div class="w-100 text-center">
+            <div style="text-align:right; " class="w-100 mt-2">
+                <input onclick="seeThisAddressLocation(@ViewBag.currentCoordinate)" type="button" id="btnGetLocation"
+                class="btn btn-warning" value="مشاهده لوکیشن این آدرس" /> <br>
+                <a class="btn btn-secondary" href="/User/addoreditaddress/@ViewBag.CurrentAddress" +>ویرایش این
+                    آدرس</a>
+            </div>
+        </div>
+        <br>
+
+
+        <p id="deliveryPrice" style="text-align: right;" class="price-format mb-3">
+            هزینه پیک:<span>@ViewBag.deliveryPrice تومان</span>
+        </p>
+
+    }
+    <div>
+        <mark class="price-format mb-2" style="float: right;background-color: #e3ffe7;padding: 9px 9px;">
+            <span style="font-weight: bolder;"> هزینه ظرف : </span>
+            @ViewBag.boxPrice تومان
+        </mark>
+    </div>
+    <br><br><br>
+
+    <div>
+        <mark class="price-format mb-2" style="float: right;background-color: #e3ffe7;padding: 9px 9px;">
+            <span style="font-weight: bolder;">تخفیف : </span>
+            @ViewBag.discount تومان
+        </mark>ّ
+    </div>
+    <br><br>
+    <div>
+        <mark class="price-format" style="float: right;background-color: #e3ffe7;padding: 9px 9px;">
+            <span style="font-weight: bolder;">مجموع فاکتور: </span>
+           @ViewBag.totalPrice تومان
+        </mark>
+    </div>
+    <br><br><br>
+
+    @if(ViewBag.wallet!=null){
+    <div>
+        <mark class="price-format" style="float: right;background-color: #AF2828;padding: 9px 9px;color: white;">
+            <span style="font-weight: bolder;"> کیف پول : </span>
+            <bdi>@ViewBag.wallet</bdi> تومان
+        </mark>
+    </div>
+    <br><br><br>
+    }
+
+    <div>
+        <mark class="price-format" style="float: right;background-color:#006300;padding: 9px 9px;color: white;">
+            <span style="font-weight: bolder;"> قابل پرداخت : </span>
+            <bdi>@ViewBag.readyToPay</bdi> تومان
+        </mark>
+    </div>
+    <br><br><br><br><br><br><br><br>
+    <div onclick="submitOrder()" class="btn btn-outline-danger btn-connect-to-asanpardakht  ">
+        <div style="height: 100%; width: 100%; position: relative"></div>
+        <img src="~/img/asan-pardakht.png" alt="">
+        <p>اتصال به درگاه آسان پرداخت</p>
+    </div>
+
+    <div style="width: 100%;height: 7rem;"></div>
+
+    <input type="text" name="Coordinate" id="getCoordinate" hidden>
+
+</div>
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="dist/leaflet.awesome-markers.js"></script>
+<script src="/scripts/ContinueShopping.js"></script>
+

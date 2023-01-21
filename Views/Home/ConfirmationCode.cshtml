@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "ConfirmationCode";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br>
+<br>
+<br>
+<div dir="rtl" class="container">
+    <form asp-action="ConfirmationCode" asp-controller="Home" class="col-6 col-md-3  loginForm">
+        <div class="form-group">
+            
+            <input name="code"   inputmode="numeric"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  placeholder=" کد ارسالی را وارد کنید">
+            
+        </div>
+        <button type="submit" class="btn btn-success px-3">  تایید</button>
+       <p>@ViewBag.message</p>
+    </form>
+</div>
+
+
+

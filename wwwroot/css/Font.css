@@ -1,0 +1,38 @@
+@font-face {
+    font-family: "BHoma";
+    src: url("../Fonts/B Homa.ttf") format("ttf"), url("../Fonts/B Homa.woff") format("woff"), url("../Fonts/B Homa.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "BKoodakBold";
+    src: url("../Fonts/BKoodakBold.ttf") format("ttf"), url("../Fonts/BKoodakBold.woff") format("woff"), url("../Fonts/BKoodakBold.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "BMorvarid";
+    src: url("../Fonts/BMorvarid.ttf") format("ttf"), url("../Fonts/BMorvarid.woff") format("woff"), url("../Fonts/BMorvarid.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Iranian Sans";
+    src: url("../Fonts/Iranian Sans.ttf") format("ttf"), url("../Fonts/Iranian Sans.woff") format("woff"), url("../Fonts/Iranian Sans.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Shabnam-Bold";
+    src: url("../Fonts/Lalezar-Regular.ttf") format("ttf"), url("../Fonts/Lalezar-Regular.woff") format("woff"), url("../Fonts/Lalezar-Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Shabnam";
+    src: url("../Fonts/Shabnam.ttf") format("ttf"), url("../Fonts/Shabnam.woff") format("woff"), url("../Fonts/Shabnam.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "B Roya";
+    src: url("../Fonts/B Roya.ttf") format("ttf"), url("../Fonts/B Roya.woff") format("woff"), url("../Fonts/B Roya.woff2") format("woff2");
+}
+@font-face {
+    font-family: "tahoma";
+    src: url("'../Fonts/Tahoma Regular.ttf'") format("ttf"), url("../Fonts/Tahoma Regular.woff") format("woff"), url("../Fonts/Tahoma Regular.woff2") format("woff2");
+}

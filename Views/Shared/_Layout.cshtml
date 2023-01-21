@@ -1,0 +1,152 @@
+﻿@using RadicalTherapy.Data.Repository
+@using System.Security.Claims
+
+<html lang="en">
+@{
+    int walet = 0;
+    if (User.Identity.IsAuthenticated)
+    {
+
+        var mobile = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        using (UnitOfWork db = new UnitOfWork())
+        {
+            walet = db.UserRepository.Get(c => c.Mobile == mobile).First().Wallet;
+        }
+    }
+
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> آبمیوه طبیعی سبحان - شیراز  </title>
+    <meta name="description" content="آبمیوه طبیعی سبحان - شیراز  ">
+    <link rel="icon" href="icon_path" type="image/icon type">
+    @*--------------CDN---------------*@
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/basket-reset.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <SCript src="~/lib/persianumber.min.js"></SCript>
+    <link rel="stylesheet" href="~/lib/basket-style.css">
+
+    
+    <link rel="stylesheet" href="~/CSS/Style.css">
+    <link rel="stylesheet" href="~/CSS/Responsive.css">
+    <link rel="stylesheet" href="~/CSS/Font.css">
+
+
+
+    <script>
+        $(document).ready(function () {
+            $('body').persiaNumber();
+
+        })
+    </script>
+
+    <script src="~/Scripts/Jquery.js"></script>
+
+    <style>
+        table,
+        tr,
+        th,
+        td,
+        thead,
+        tbody {
+            border: none !important;
+        }
+    </style>
+
+    <script src="~/Scripts/Script.js"></script>
+
+
+
+</head>
+
+<body onunload="">
+
+
+    <nav class="navbar navbar-expand-md bg-light navbar-light shadow-lg" style="font-family:'Shabnam-Bold' ;">
+        <div id="header" class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img id="logo" src="~/img//logo.png" alt="SobhanJuice" />
+            </a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div dir="rtl" class="walet-menu d-md-none d-block"> <span>کیف پول :</span><span class="amount"> <bdi>
+                            @walet</bdi> تومان</span> </div>
+
+                <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul dir="rtl" class="navbar-nav me-auto text-center pr-0 ">
+                        <li class="nav-link">
+                            <a asp-action="Index" asp-controller="Home" class="nav-item">صفحه اصلی</a>
+                        </li>
+                        
+                        <li class="nav-link">
+                            <a asp-action="Index" asp-controller="order" class="nav-item">سفارشات</a>
+                        </li>
+                 
+                        <li class="nav-link">
+                            <a class="nav-item sappLink " href="https://snappfood.ir/juice/menu/%D8%A2%D8%A8%D9%85%DB%8C%D9%88%D9%87_%D8%B7%D8%A8%DB%8C%D8%B9%DB%8C_%D8%B3%D8%A8%D8%AD%D8%A7%D9%86-r-3e98m2" >لینک اسنپ فود</a>
+                        </li>
+                               <li class="nav-link">
+                            <a href="/Home/ContactUs" class="nav-item">تماس باما</a>
+                        </li>
+                        <li class="nav-link">
+                            <a href="/home/logout" class="nav-item logout">خروج</a>
+                        </li>
+                        <li class="walet-menu d-none d-md-block"><span>کیف پول :</span><span dir="rtl" class="amount"> <bdi>
+                                    @walet</bdi> تومان</span></li>
+                    </ul>
+                </div>
+            }
+            else
+            {
+
+                <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul dir="rtl" class="navbar-nav me-auto text-center pr-0 ">
+                        <li class="nav-link">
+                            <a asp-action="Index" asp-controller="Home" class="nav-item">صفحه اصلی</a>
+                        </li>
+                        <li class="nav-link">
+                            <a href="/home/login" class="nav-item">ورود/ثبت نام </a>
+                        </li>
+                        <li class="nav-link">
+                            <a href="/Home/ContactUs" class="nav-item">تماس باما</a>
+                        </li>
+                        <li class="nav-link">
+                            <a class="nav-item sappLink " href="https://snappfood.ir/juice/menu/%D8%A2%D8%A8%D9%85%DB%8C%D9%88%D9%87_%D8%B7%D8%A8%DB%8C%D8%B9%DB%8C_%D8%B3%D8%A8%D8%AD%D8%A7%D9%86-r-3e98m2" >لینک اسنپ فود</a>
+                        </li>
+                    </ul>
+                </div>
+            }
+
+        </div>
+
+    </nav>
+
+    @RenderBody()
+
+    <script src="~/lib/shopping-Basket-Panel.js"></script>
+    <link rel="stylesheet" href="~/CSS/component.css">
+    <script src="~/Scripts/Script.js"></script>
+
+</body>
+
+</html>

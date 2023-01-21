@@ -1,0 +1,78 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .test {
+            position: absolute;
+            left: 0%;
+            top: 0%;
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        var mousePosition;
+        var offset = [0, 0];
+        var div;
+        var isDown = false;
+
+        div = document.createElement("div");
+        div.classList = 'test';
+
+        document.body.appendChild(div);
+
+        div.addEventListener('mousedown', function (e) {
+            isDown = true;
+            offset = [
+                div.offsetLeft - e.clientX,
+                div.offsetTop - e.clientY
+            ];
+        }, true);
+
+        document.addEventListener('mouseup', function () {
+            isDown = false;
+        }, true);
+
+        document.addEventListener('mousemove', function (event) {
+            event.preventDefault();
+            if (isDown) {
+                mousePosition = {
+
+                    x: event.clientX,
+                    y: event.clientY
+
+                };
+                div.style.left = (mousePosition.x + offset[0]) + 'px';
+                div.style.top = (mousePosition.y + offset[1]) + 'px';
+            }
+        }, true);
+    </script>
+
+<button  id="click1">cickeaasdfasdfsdasdfme</button>
+    <form runat="server">
+        <input accept="image/*" type='file' id="imgInp" />
+        <img id="blah" src="#" alt="your image" />
+    </form>
+    <script>
+        imgInp.onchange = evt => {
+            const [file] = imgInp.files
+            if (file) {
+                blah.src = URL.createObjectURL(file)
+            }
+        }
+        click1.onclick=evt=>{
+           console.log(click1)
+        }
+    </script>
+</body>
+
+</html>

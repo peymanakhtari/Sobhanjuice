@@ -1,0 +1,20 @@
+﻿@model SobhanJuice.Models.ViewModel.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br>
+<br>
+<br>
+<div dir="rtl" class="container">
+    <form id="formLogin" asp-action="Login" asp-controller="Home" class="col-8 col-md-4 loginForm">
+        <div class="form-group">
+      
+            <input name="number"  inputmode="numeric"  class="form-control" id="userMobile" aria-describedby="emailHelp"  placeholder="شماره موبایل">
+            @Html.ValidationMessageFor(m => m.number,"",new {@class="validation-message ms-2"})
+
+        </div>
+        <button type="button" id="SubmitBtnLoginPage" onclick="loginFromLoginPage()" class="btn btn-success px-3">دریافت کد ورود</button>
+    </form>
+</div>
+

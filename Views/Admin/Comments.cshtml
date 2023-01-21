@@ -1,0 +1,43 @@
+﻿@model List<SobhanJuice.Models.Comment>
+@{
+    ViewData["Title"] = "Comments";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div dir="rtl" class="col-12 col-md-9 mt-5 ms-3" style="border: 2px;">
+    <a class="btn btn-success" href="/admin/comments/@ViewBag.productId?show=1">نمایش</a>
+    <a class="btn btn-danger" href="/admin/comments/@ViewBag.productId?show=-1">عدم نمایش</a>
+     <a class="btn btn-info" href="/admin/comments/@ViewBag.productId">همه</a>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>محصول</th>
+                <th>امتیاز</th>
+                <th>متن</th>
+                <th>نمایش</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Product.Name</td>
+                    <td>@item.Score</td>
+                    <td>@item.Text</td>
+                    <td>
+                        @if (@item.Show)
+                        {
+                            <button id="@item.ID" class="btn btn-success" onclick="ChangeCommentShow(this.id,false)">نمایش</button>
+                        }
+                        else
+                        {
+                            <button id="@item.ID" class="btn btn-danger" onclick="ChangeCommentShow(this.id,true)">عدم نمایش</button>
+                        }
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

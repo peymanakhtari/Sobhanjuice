@@ -1,0 +1,20 @@
+﻿@using SobhanJuice.Models
+@model List<Category>
+@{
+    ViewData["Title"] = "Categories";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+
+<div class="main col-md-9">
+    <br><br><br><br>
+    @foreach (var item in Model)
+    {
+        <a class="btn btn btn-secondary mt-1" href=@Url.Action("AddOrEditCategory",new{item.ID})>@item.Name _ @item.Code</a>
+    }
+    <br><br>
+    <a class="btn btn btn-warning" href=@Url.Action("AddOrEditCategory")>افزودن</a>
+    <br><br>
+    <a class="btn btn btn-info" href=@Url.Action("Products")>بازگشت</a>
+
+</div>

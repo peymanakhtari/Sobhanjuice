@@ -1,0 +1,91 @@
+﻿@using SobhanJuice.Models
+@model Address
+@{
+    ViewData["Title"] = "AddOrEditAdress";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<input type="text" id="tempgetCoordinate" hidden>
+<input type="text" id="tempdistance" hidden>
+
+<head>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <link href="https://static.neshan.org/sdk/leaflet/1.4.0/leaflet.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+    <link rel="stylesheet" href="dist/leaflet.awesome-markers.css">
+    <script src="https://static.neshan.org/sdk/leaflet/1.4.0/leaflet.js" type="text/javascript"></script>
+</head>
+<br><br><br><br>
+<div style="font-family: shabnam;" dir="rtl" class="container">
+
+    <form id="formAddress" action="/User/addoreditaddress" method="post">
+        <label style="font-weight: bold;" class="mb-1 ms-1" asp-for="Text"> آدرس : </label>
+        <input type="text" name="id" value="@Model.ID" hidden>
+        <textarea id="address" class="form-control mt-1" name="text" type="text">@Model.Text</textarea>
+        <input id="getCoordinate" name="Coordinate" value="@Model.Coordinate" type="text" hidden>
+        <input name="distance" id="distance" value="@Model.distance" type="text" hidden>
+    </form>
+    <br>
+    <div class="w-100 text-right">
+        <button onclick="openMap()" id="btnGetLocation" class="btn btn-warning">تعیین موقعیت روی نقشه</button>
+        <br>
+        @if (Model.ID == 0)
+        {
+            <input id="btnsubmitAddress" type="submit" onclick="submitAddress(this.id)" class="btn btn-success mt-1 px-5" value="ثبت" />
+        }
+        else
+        {
+            <input id="btnsubmitAddress" type="submit" onclick="submitAddress(this.id)" class="btn btn-success mt-1 px-5" value="ویرایش" />
+        }
+    </div>
+
+</div>
+<div id="getLocation" style="display: none;">
+    <div id="locationTopbar">
+        <button id="btnCloseMap" class="btn btn-danger" onclick="closeMap()">بستن</button>
+        <div id="showDelivery">
+            لوکیشن را مشخص کنید
+        </div>
+        <button id="currentGetLocation" class="btn btn-info" onclick="getLocation()">دریافت موقعیت کنونی شما
+        </button>
+        <button id="btnConfirmLocation" class="btn btn-success" onclick="confirmLocation()" disabled>تایید</button>
+    </div>
+    <div id="locationMiddle">
+        <div id="map" class="shadow "></div>
+    </div>
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="dist/leaflet.awesome-markers.js"></script>
+
+<script>
+    function fire(val) {
+        Swal.fire({
+            text: val,
+            confirmButtonColor: '#006b0b',
+            confirmButtonText: 'متوجه شدم'
+        })
+    }
+    function submitAddress(id) {
+ if ($('#distance').val() !=0) {
+     if ($('#address').val().length > 5) {
+         $('#'+id).prop('disabled', true);
+         document.getElementById('formAddress').submit();
+     }
+     else {
+         fire('لطفا متن آدرس را بنویسید');
+         $('#address').css('border','red solid 1px')
+     }
+ }
+ else {
+     $('#btnGetLocation').addClass('btn-danger')
+     fire('لطفا موقعیت مکانی را در نقشه مشخص کنید')
+ }
+
+}
+</script>
+<style>
+    .swal2-popup {
+        font-family: shabnam;
+        color: red
+    }
+</style>

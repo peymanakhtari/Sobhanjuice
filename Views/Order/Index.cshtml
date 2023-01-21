@@ -1,0 +1,249 @@
+﻿@using SobhanJuice.Models
+@model List<OrderModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string navActive=ViewBag.UserHasActiveOrder?"active":"";
+    string navNotActive=ViewBag.UserHasActiveOrder?"":"active";
+     string tabActive=ViewBag.UserHasActiveOrder?"show active":"";
+    string tabNotActive=ViewBag.UserHasActiveOrder?"":"show active";
+}
+
+<ul class="orders nav nav-tabs pt-3 " id="myTab" role="tablist">
+  
+     <li class="nav-item" role="presentation">
+        <button style="width: 9rem;" class="nav-link @navNotActive" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                type="button" role="tab" aria-controls="profile" aria-selected="false">
+            تاریخچه سفارشات
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button style="width: 9rem;" class="nav-link @navActive" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                type="button" role="tab" aria-controls="home" aria-selected="true">
+            سفارشات فعال
+        </button>
+    </li>
+    
+</ul>
+<div style="font-family: Iranian Sans;" class="tab-content" id="myTabContent">
+    <div class="tab-pane fade @tabActive" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="row">
+            <div class="order-history col-11 col-sm-9 col-lg-6   mx-auto mt-3">
+                    @if (!Model.Any(c=>c.Order.Status==1||c.Order.Status==-1||c.Order.Status==2))
+                    {
+                        <p class="noOrder">شما سفارش فعالی ندارید</p>
+                    }
+                 @foreach (var item in Model)
+                 {
+                     
+                    if (item.Order.Status == 1 || item.Order.Status == 2 || item.Order.Status == -1)
+                    {
+                        <div class="card shadow">
+
+                            @if (item.Order.Status == 1)
+                            {
+                                <div class="card-header w-100 text-muted text-center ">
+                                    <span class="order-status">
+                                        سفارش در انتظار تایید
+                                        <a href="tel://07136291210" class="call-shop">برقراری تماس </a>
+                                    </span>
+                                </div>
+                            }
+                            else if (item.Order.Status == 2)
+                            {
+                                <div class="card-header w-100 text-muted text-center ">
+                                    <span class="order-status">
+                                        سفارش در حال آماده سازی
+                                    </span>
+                                    <span class="order-time">
+                                        زمان تقریبی آماده سازی و ارسال : <span style="font-size: 20px;">@item.Order.Duration دقیقه</span>
+                                    </span>
+                                </div>
+                            }
+                            else if (item.Order.Status == -1)
+                            {
+                                <div class="card-header w-100 text-muted text-center peyOrderDiff">
+                                    <span class="order-status mb-2">
+                                        سفارش در انتظار پرداخت
+                                    </span>
+                                    <br>
+                                    <span style="line-height:1.4rem" class="order-time mt-2">
+                                        مبلغ سفارش شما تغییر کرده لطفا تفاوت
+                                        قیمت را پرداخت کنید
+                                    </span>
+                                    <br><br>
+                                    <span class="order-time mt-2">
+                                        <a href="/Peyment/UpdateOrder/@item.Order.ID" class="btn btn-danger mt-2">
+                                            اتصال به درگاه
+                                            پرداخت
+                                        </a>
+                                    </span>
+                                </div>
+                            }
+
+
+                            @foreach (var detail in item.Details)
+                            {
+                                <div class="row order-productList no-gutters  m-1  mt-0 pt-3 mb-0">
+                                    <div class="col-auto ">
+                                        <img src="@System.Text.Encoding.Default.GetString(detail.Product.Picture)"
+                                 class="img-fluid rounded" alt="@detail.Product.Name">
+                                    </div>
+                                    <div dir="rtl" class="col">
+                                        <div class="card-block px-2 pt-2">
+                                            <h4 class="card-title">@detail.Product.Name</h4>
+                                            <p class="card-text price-format">@detail.Product.Price تومان</p>
+                                            <p class="card-text">@detail.Count عدد</p>
+                                            <button id="btnAdd-@item.Order.ID-@detail.Product.ID" href="#"
+                                        onclick="addToBasketOrders(this.id)" class="btn btn-success">
+                                                سفارش مجدد
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div id="addDialog-@item.Order.ID-@detail.Product.ID" class="AddToBasket-orders">
+                                        <p>محصول به سبد خرید اضافه شد</p>
+                                        <button onclick="dismisAddDialog()" class="dismisAddDialog ">متوجه شدم</button>
+                                        <button onclick="location.href='/home/index'" class="return-toIndex "> صفحه اصلی</button>
+                                    </div>
+                                </div>
+                                var Last = item.Details.Last();
+                                if (!detail.Equals(Last))
+                                {
+                                    <hr>
+                                }
+
+                            }
+
+                            <div dir="rtl" class="card-footer w-100 text-muted mt-2 ">
+                                <div class="footerContainer text-center">
+                                    <div id="factorDetailTitle">جزییات فاکتور</div>
+                                    <div> <span> تاریخ :@item.date </span> <span>ساعت @item.time</span></div>
+                                    <div class="factorAddress">آدرس : @item.Address.Text</div>
+                                    <div>موبایل : @item.Order.User.Mobile</div>
+                                    <div class="price-format"> هزینه پیک : @item.Order.DeliveryPrice</div>
+                                    <div class="price-format"> هزینه ظرف : @item.Order.BoxPrice</div>
+                                    <div class="price-format"> تخفیف : @item.Order.Discount</div>
+                                    <div class="price-format"> مجموع قیمت : @item.Order.TotalPrice تومان </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br> <br> <br>
+                    }
+
+                }
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="tab-pane fade  @tabNotActive" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="row">
+            <div class="order-history col-11 col-sm-9 col-lg-6 mx-auto mt-3">
+                      @if (!Model.Any(c=>c.Order.Status==5))
+                    {
+                        <p class="noOrder">شما تا به حال سفارشی ثبت نکرده اید</p>
+                    }
+                @foreach (var item in Model)
+                {
+              
+                    if (item.Order.Status == 5)
+                    {
+
+                        <div class="card shadow">
+                            <div class="card-header w-100 text-muted text-center ">
+                                <span class="order-status">
+                                    تاریخ : @item.date
+                                </span>
+                                <span class="order-time"> ساعت : @item.time </span>
+                            </div>
+
+                            @foreach (var detail in item.Details)
+                            {
+                                <div class="row order-productList no-gutters  m-1  mt-0 pt-3 mb-0">
+                                    <div class="col-auto ">
+                                        <img src="@System.Text.Encoding.Default.GetString(detail.Product.Picture)"
+                                 class="img-fluid rounded" alt="@detail.Product.Name">
+                                    </div>
+                                    <div dir="rtl" class="col">
+                                        <div class="card-block px-2 pt-2">
+                                            <h4 class="card-title">@detail.Product.Name</h4>
+                                            <p class="card-text price-format">@detail.Product.Price تومان</p>
+                                            <p class="card-text">@detail.Count عدد</p>
+                                            <button id="btnAdd-@item.Order.ID-@detail.Product.ID" href="#"
+                                        onclick="addToBasketOrders(this.id)" class="btn btn-success">
+                                                سفارش مجدد
+                                            </button>
+                                            <div  class="submit-comment"><a href="/product/index/@detail.Product.ID">ثبت نظر </a></div>
+                                        </div>
+                                    </div>
+                                    <div id="addDialog-@item.Order.ID-@detail.Product.ID" class="AddToBasket-orders">
+                                        <p>محصول به سبد خرید اضافه شد</p>
+                                        <button onclick="dismisAddDialog()" class="dismisAddDialog ">متوجه شدم</button>
+                                        <button onclick="location.href='/home/index'" class="return-toIndex "> صفحه اصلی</button>
+                                    </div>
+                                </div>
+                                var Last = item.Details.Last();
+                                if (!detail.Equals(Last))
+                                {
+                                    <hr>
+                                }
+
+                            }
+
+
+                            <div dir="rtl" class="card-footer w-100 text-muted mt-2 ">
+                                <div class="footerContainer text-center">
+                                    <div id="factorDetailTitle">جزییات فاکتور</div>
+                                    <div class="factorAddress">آدرس : @item.Address.Text</div>
+                                    <div>موبایل : @item.Order.User.Mobile</div>
+                                    <div class="price-format"> هزینه پیک : @item.Order.DeliveryPrice</div>
+                                    <div class="price-format"> هزینه ظرف : @item.Order.BoxPrice</div>
+                                    <div class="price-format"> تخفیف : @item.Order.Discount</div>
+                                    <div class="price-format"> مجموع قیمت : @item.Order.TotalPrice تومان </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br> <br> <br>
+
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<script>
+    $(document).mouseup(function (e) {
+        var container = $(".AddToBasket-orders");
+
+        // if the target of the click isn't the container nor a descendant of the container
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+            container.fadeOut(200);
+        }
+    });
+
+    var refInterval = window.setInterval('update()', 5000); //
+
+    var update = function () {
+        $.ajax({
+            type: 'POST',
+            url: '/user/RefreshOrder',
+            success: function (result) {
+                if (result) {
+                    location.reload();
+                }
+            },
+        });
+    };
+</script>

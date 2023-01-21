@@ -1,0 +1,73 @@
+﻿@model List<SobhanJuice.Models.Product>
+@{
+    ViewData["Title"] = "ProductList";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div dir="rtl" class="col-12 col-md-9 mt-5 ms-3" style="border: 2px;">
+    <input id="myInput" type="text" placeholder="Search..">
+    <button onclick="location.reload()" class="btn btn-warning"> به روز رسانی</button>
+    <a href="/admin/productlist/1" class="btn btn-success">موجود</a>
+    <a href="/admin/productlist/-1" class="btn btn-danger">ناموجود</a>
+     <a href="/admin/productlist" class="btn btn-primary">همه</a>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>نام</th>
+                <th>عکس</th>
+                <th>توضوحات</th>
+                 <th>قیمت </th>
+                <th>تخفیف</th>
+                <th>ظرف</th>
+                <th>قیمت نهایی </th>
+                <th>موجود</th>
+                <th>ویرایش</th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td><img src="@System.Text.Encoding.Default.GetString(item.Picture)" /></td>
+                    <td>@item.Description</td>
+                    <td>@item.Price</td>
+                    <td>@item.Discount</td>
+                    <td>@item.Box</td>
+                    <td>@item.FinalPrice</td>
+                    <td id="@item.ID">
+                        @if (item.Exist)
+                        {
+                            <button class="btn btn-success" onclick="changeExist(@item.ID,false)">موجود</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-danger" onclick="changeExist(@item.ID,true)">ناموجود</button>
+                        }
+                    </td>
+                    <td> <a href=@Url.Action("addorEditProduct",new{Id=item.ID}) class="btn btn-secondary mt-1">ویرایش</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <script>
+
+        window.addEventListener("pageshow", function (event) {
+            var historyTraversal = event.persisted ||
+                (typeof window.performance != "undefined" &&
+                    window.performance.navigation.type === 2);
+            if (historyTraversal) {
+                window.location.reload();
+            }
+        });
+
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+</div>

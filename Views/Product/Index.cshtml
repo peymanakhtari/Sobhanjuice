@@ -1,0 +1,113 @@
+﻿@model SobhanJuice.Models.Product
+@using SobhanJuice.Models
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</head>
+<style>
+    body {
+        font-family: 'Shabnam';
+    }
+</style>
+
+<div style="margin-bottom:30rem;" class="container ">
+
+    <div class="cmt-product mt-5 mb-5">
+        <div class="cmt-product-image shadow col-5 col-md-4 col-lg-3">
+            <img src="@System.Text.Encoding.Default.GetString(Model.Picture)" alt="">
+        </div>
+        <div class="cmt-product-cotent col-6 col-md-7 col-lg-8">
+            <h2>@Model.Name</h2>
+            <p class="cmtDescription">@Model.Description</p>
+            @if (Model.Discount==0)
+            {
+                
+            <p> <span dir="rtl">@Model.FinalPrice تومان </span></p>
+            }
+            else
+            {   
+                 <p> <span dir="rtl">@Model.FinalPrice تومان </span><span class="noDiscount-cmt">@Model.Price</span></p>
+            <div class="cmt-discount">
+                -@Model.Discount%
+            </div>
+            }
+            <br><br>
+            @if (ViewBag.average != null)
+            {
+                <div class="cmt-score shadow">
+                    @ViewBag.average <span style="color: orange;" class="fa fa-star me-1"></span>
+                </div>
+
+            }
+        </div>
+    </div>
+    <br><br>
+    <div dir="rtl" class="row">
+        @if (ViewBag.writeComment)
+        {
+            <div dir="rtl" id="CommentContainer">
+                <h1 style="font-size: 1.4rem;" class="nazarat">امتیاز شما به این محصول :</h1>
+                <br>
+                <div class="rate ">
+                    <input type="radio" id="star5" name="rate" value="5" />
+                    <label for="star5" title="text">5 stars</label>
+                    <input type="radio" id="star4" name="rate" value="4" />
+                    <label for="star4" title="text">4 stars</label>
+                    <input type="radio" id="star3" name="rate" value="3" />
+                    <label for="star3" title="text">3 stars</label>
+                    <input type="radio" id="star2" name="rate" value="2" />
+                    <label for="star2" title="text">2 stars</label>
+                    <input type="radio" id="star1" name="rate" value="1" />
+                    <label for="star1" title="text">1 star</label>
+                </div>
+                <br>
+                <div class="col-12 ">
+                    <div style="float: right;" class="form-floating mb-5  col-10 col-sm-8 col-lg-7">
+                        <input type="text" id="productId" value="@Model.ID" hidden />
+                        <textarea style="height: 100px;float: right;" class="form-control"
+                        placeholder="Leave a comment here" id="floatingTextarea2" rows="2"></textarea>
+                        <label style="margin-right: 1rem;" for="floatingTextarea2">نظر خود را بنویسید</label>
+                        <button onclick="SubmitComment()" id="btnSubmitComment"  style="float: right;width: 7rem;"
+                        class="btn btn-success me-3 mt-2">ثبت</button>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+
+        <h1 class="nazarat">نظرات</h1>
+
+        <br>
+        @foreach (var item in (List<Comment>)ViewBag.comments)
+        {
+            <div class="col-12">
+                <div dir="rtl" class=" card card-comment col-11 col-lg-5">
+                    <div style="position:relative" class="card-body">
+                        <h5 class="card-title">@item.Name :</h5>
+                        <p class="card-text">@item.Text</p>
+                        <span class="commentRate shadow"><span style="color: orange;"
+                            class="fa fa-star me-1"></span>@item.Score</span>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (((List<Comment>)ViewBag.comments).Count() == 0)
+        {
+            <br><br>
+            <p style="font-family: shabnam-bold;font-size: 1.2rem;">برای این محصول نظری ثبت نشده</p>
+        }
+
+    </div>
+
+
+
+
+</div>

@@ -1,0 +1,45 @@
+﻿@model List<SobhanJuice.Models.User>
+@{
+    ViewData["Title"] = "Users";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div dir="rtl" class="col-12 col-md-9 mt-5 ms-3">
+     <form style="display: inline-block" action="/admin2/Users">
+  <input type="text" placeholder="mobile" name="id">
+  <input type="submit" value="جستجو">
+ </form>
+ <a href="/admin2/users/-1" class="btn btn-info">همه</a>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>نام</th>
+                <th>موبایل </th>
+                <th>کیف پول </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Mobile</td>
+                        <td>@item.Wallet</td>
+                        <td>
+                            <form action="/admin2/updatewallet" method="post">
+                                <input type="number" name="wallet" value="@item.Wallet">
+                                 <input type="number" name="userid" value="@item.ID" hidden>
+                                <input type="submit" value="ثبت" class="btn btn-success">
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+
+</div>

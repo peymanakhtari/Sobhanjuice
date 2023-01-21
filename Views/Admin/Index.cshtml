@@ -1,0 +1,41 @@
+﻿@using SobhanJuice.Utilities
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<head>
+    <link href="https://static.neshan.org/sdk/leaflet/1.4.0/leaflet.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+    <link rel="stylesheet" href="dist/leaflet.awesome-markers.css">
+    <script src="https://static.neshan.org/sdk/leaflet/1.4.0/leaflet.js" type="text/javascript"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<div dir="rtl" class="col-12 col-md-9 mt-5 ms-3" style="border: 2px;">
+    <a href="@Url.Action("Orders","AdminOrders",new {from=DateTime.Now.AddDays(-1).ChangeTime(0,0,0),until=DateTime.Now})"
+        class="btn btn-info" style="font-weight: bolder;">سفارشات امروز</a>
+    <button onclick="location.reload()" class="btn btn-warning">به روز رسانی</button>
+    <a href="/admin/productlist" class="btn btn-primary">محصولات</a>
+       <a href="/Admin/Logout" class="btn btn-danger m-1"> خروچ  </a>
+    <br><br>
+    <div id="NotConfirmedOrder" class="shadow" style="width: 100%;border: 1px solid;">
+        <p class="text-center pb-2" style="background-color:red ;color:white;font-weight:bold">سفارشات در انتظار تایید
+        </p>
+
+    </div><br><br>
+    <div id="ConfirmedOrder" class="shadow" style="width: 100%;border: 1px solid;">
+        <p class="text-center pb-2" style="background-color:green ;color:white;font-weight:bold">سفارشات در جریان</p>
+
+    </div>
+    <div class="mapdiv">
+        <div class="mapContainer">
+            <button onclick="closeMap()" class="btn btn-danger">بستن</button>
+            <div id="map"> </div>
+        </div>
+    </div>
+    </div>
+    <script>
+   
+        
+    </script>

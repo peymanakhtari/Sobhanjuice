@@ -1,0 +1,333 @@
+﻿@using SobhanJuice.Models
+@model List<Product>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<input type="text" hidden id="basketId" value="@ViewBag.BasketId_string" />
+<input type="text" hidden id="basketCount" value="@ViewBag.BasketCount_string" />
+<head>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</head>
+
+<script type="text/javascript">
+    window.onload = function () {
+        $.ajax({
+            type: "POST",
+            url: '/Home/GetCookieOnLoad',
+            dataType: "text",
+            success: function (data) {
+                if (data != null) {
+                    var obj = JSON.parse(data);
+                    var basketCount = obj.basketCount;
+                    obj.basketId.forEach(function (item, index, array) {
+                        $('#count-' + item).html(basketCount[index])
+                    });
+                    AdjustShoppingBasket();
+                }
+            },
+            error: function (req, status, error) { }
+        })
+        $('#loader').css('display', 'none')
+        $('#menu').css('display', 'block')
+    @if (ViewBag.open == 0)
+    {
+        <text>
+                          fire(' مغازه تعطیل است - ساعت کار: همه روزه از @ViewBag.OpenTime صبح الی @ViewBag.CloseTime  بامداد ،جمعه ها از @ViewBag.OpenFriday صبح');
+        </text>
+    }
+    @if (ViewBag.open == -1)
+    {
+        <text>
+                          fire('با عرض پوزش موقتا قادر به سرویس دهی نیستیم');
+        </text>
+    }
+    };
+</script>
+<div id="MainImg" class="carousel slide " data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#MainImg" data-bs-slide-to="0" class="active" aria-current="true"
+                aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#MainImg" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#MainImg" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/img/slide-(5).jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/img/slide (4).webp" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/img/slide6.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#MainImg" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#MainImg" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<div id="Line" class="Line"></div>
+<div id="pickup" style="background-color: green;padding: 4px;" class="w-100 text-center ">
+    @if (Context.Request.Cookies["pickup"] == "True")
+    {
+        <div class="w-100 p-1 ">
+            <button id="delivery" onclick="pickup(false,this.id)" class="btn btn-outline-success">ارسال به محل</button>
+            <button id="pickup" onclick="pickup(true,this.id)" class="btn btn-success deliveryPickup">تحویل درب مغازه</button>
+        </div>
+
+    }
+    else
+    {
+        <div class="w-100 p-1 ">
+            <button id="delivery" onclick="pickup(false,this.id)" class="btn btn-success deliveryPickup">ارسال به محل</button>
+            <button id="pickup" onclick="pickup(true,this.id)" class="btn btn-outline-success">تحویل درب مغازه</button>
+        </div>
+
+    }
+
+</div>
+
+<div class="Line"></div>
+<div id="loader" style="width: 100%;height: 60vh;text-align: center;">
+    <div style="margin-top: 8rem;font-size: 1.4rem;width: 4rem;height: 4rem;" class="spinner-border text-success"
+         role="status">
+    </div>
+</div>
+<div style="display:none;" id="menu">
+
+    <div class="pageFoot fixedElement">
+        @foreach (var item in (List<Category>)ViewBag.categories)
+        {
+            <div class='pageFootItem '>
+                <div style="background-color: #f7f7f7;" class="img-text">
+                    <img src="@System.Text.Encoding.Default.GetString(item.Picture)" alt="@item.Name">
+                    <p>@item.Name</p>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div style="font-family: shabnam-bold;" class="pageContent">
+        @foreach (var item in (List<Category>)ViewBag.categories)
+        {
+            <div class="pageContentItem">
+                <ul dir="rtl">
+                    <li style="width:100%;border:none" class="addHieght"></li>
+                    @foreach (var product in Model)
+                    {
+                        if (product.CategoryId == item.ID)
+                        {
+                            <li dir="ltr">
+
+                                <div id="@product.ID" class="product">
+                                    <a href="/Product/Index/@product.ID">
+                                        <img src="@System.Text.Encoding.Default.GetString(product.Picture)" alt="@item.Name">
+                                    </a>
+                                    <h3>@product.Name</h3>
+                                    <p dir="rtl" class="product-description">@product.Description</p>
+
+                                    @if (product.Discount == 0)
+                                    {
+                                        <p dir="rtl" class="price-format product-price "> @product.FinalPrice تومان </p>
+                                    }
+                                    else
+                                    {
+                                        <p dir="rtl" class="price-format  price-without-discount"> @product.Price تومان </p>
+                                        @if (product.Description != null)
+                                        {
+                                            <p dir="rtl" style="right: 75px;" class="price-format product-price ">
+                                                @product.FinalPrice تومان
+                                            </p>
+                                        }
+                                        else
+                                        {
+                                            <p dir="rtl" class="price-format product-price ">
+                                                @product.FinalPrice تومان
+                                            </p>
+                                        }
+
+                                    }
+                                    @if (product.Discount > 0)
+                                    {
+                                        <div class="discount">-@product.Discount %</div>
+                                    }
+                                    @if (product.Exist)
+                                    {
+                                        <button id="addFirst-@product.ID" onclick="AddItem(this.id)"
+                                class="addFirst-mainPage addFirst btn btn-success">
+                                            افزودن
+                                        </button>
+
+                                    }
+                                    else
+                                    {
+                                        <button id="addFirst-@product.ID" onclick=""
+                                class="product-addItem-runout-button addFirst-mainPage addFirst btn btn-success">
+                                            <span class="product-addItem-runout">افزودن</span>
+                                        </button>
+                                        <div class="runout">ناموجود</div>
+                                    }
+
+                                    <div id="editCount-@product.ID" class="editCount-mainPage editCount">
+                                        <div id="addItem-@product.ID" class="addItem-mainPage addItem" onclick="AddItem(this.id)">
+                                            <div class="fas fa-plus ">
+                                            </div>
+                                        </div>
+                                        <span id="count-@product.ID" class=" count-mainPage count bg-success ">0</span>
+                                        <div id="LowOff-@product.ID" class="LowOff-mainPage LowOff" onclick=" LowOff(this.id)">
+                                            <div class="fa fa-minus">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    }
+                    <li style="height:50px; width:100%;border:none"></li>
+                </ul>
+            </div>
+        }
+
+
+    </div>
+</div>
+
+<div id="under-menu" >
+    <div class="UnderMenuContent">
+        <h1>خواص آبمیوه طبیعی</h1>
+        <p>
+<br><br><br>
+محتوای این بخش به زودی تکمیل می‌گردد
+<br><br>
+        </p>
+    </div>
+ 
+</div>
+
+<div style="z-index: 2;" class="cd-main-content btn-basket">
+    <a href="#0" class="cd-btn js-cd-panel-trigger  btn btn-success position-relative shopping-basket"
+       data-panel="main">
+        <i class="fas fa-shopping-basket "></i>
+        <div id="basket-count" class="basket-count"> 0</div>
+    </a>
+    <!-- your content here -->
+</div>
+<!-- cd-panel--is-visible -->
+<div style="z-index: 2;" class="cd-panel cd-panel--from-right js-cd-panel-main ">
+    <header style="background-color:#f5f5f5" class="cd-panel__header">
+        <h1 style="color: #0d0d0d;">سبد خرید</h1>
+        <a href="#0" class="cd-panel__close js-cd-close">Close</a>
+
+    </header>
+
+    <div class="cd-panel__container ">
+        <div style="font-family: shabnam;" class="cd-panel__content ">
+            <div class="basketIsEmpty">
+                <p dir="rtl" style="font-size: 1rem;color:black;margin-top:15rem">سبد خرید شما خالی است</p>
+            </div>
+            <div class="remove-basket col-9 col-sm-6 col-md-5 mx-auto">
+                <button class="btn btn-dark ">
+                    <i class="fa fa-trash"></i> &nbsp; خالی کردن سبد خرید
+                </button>
+            </div>
+            <table class="table table-light basket-table-container  shadow ">
+
+                <tbody class="basket-table">
+                </tbody>
+
+
+            </table>
+
+            <div class="total-price">
+                <p>مجموع قیمت : <span id="total-price" class="price-format ">0</span></p>
+            </div>
+            @if (ViewBag.open == 0)
+            {
+                <div class="shopIsClose"> مغازه تعطیل است - ساعت کار: همه روزه از @ViewBag.OpenTime صبح الی @ViewBag.CloseTime نیمه شب ،جمعه ها از @ViewBag.OpenFriday صبح</div>
+            }
+            @if (ViewBag.open == -1)
+            {
+                <div class="ShopIsClose">با عرض پوزش موقتا قادر به سرویس دهی نیستیم</div>
+            }
+            @if (ViewBag.open == 1)
+            {
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="continue-shopping col-9 col-sm-6 col-md-5 mx-auto ">
+                        <a asp-controller="Order" asp-action="ContinueShopping" class="btn btn-success ">ادامه فرایند خرید</a>
+                    </div>
+                }
+                else
+                {
+                    <div id="insert-mobile" class="insert-mobile col-12 col-sm-8 col-md-7 mx-auto ">
+                        <div class="">
+                            <p> برای ادامه خرید موبایل خود را وارد کنید</p>
+                            <input inputmode="numeric" id="mobile" style="max-width: 16rem;" class="form-control me-auto " type="text">
+                            @Html.AntiForgeryToken()
+                            <button onclick="SendConfirmationCode1()" id="btn-sendMessage" class="btn btn-success"> ثبت</button>
+                        </div>
+                        <button id="btn-waitUntilsmsSend" style="display: none;" class="btn btn-success  ">
+                            <span class="spinner-border spinner-border-sm "></span>
+                            کمی صبر کنید
+                        </button>
+
+                    </div>
+                    <div id="getConfirmationcode" style="display: none;" class="me-auto ">
+                        <p> کد فرستاده شده به شماره <span id="SendNumber">09171898681</span> را وارد کنید</p>
+
+                        <input inputmode="numeric" id="ConfirmationCode" class="form-control" type="text" name="Code" value="" />
+                        <input onclick="LoginFromBasket()" id="btn-UserLogin" type="button" class="btn btn-secondary"
+                       value="تایید" />
+                        <button style="float:right;display: none;" id="btn-waitUntilUserLogin" class="btn btn-secondary  ">
+                            <span class="spinner-border spinner-border-sm "></span>
+                            کمی صبر کنید
+                        </button>
+                        <br /><br /><br>
+                        <span style="float:right;color:red;font-weight:bold;display: none;" class="CodeWrong ">
+                            کد اشتباه
+                            است
+                        </span>
+                        <br><br>
+                        <button style="float: right;" type="button" class="btn btn-primary ms-3 " id="btnTimer"
+                        onclick="ResendConfirmationCode()">
+                            ارسال مجدد <span id="timerSms">
+                            </span>
+                        </button>
+                        <br><br><br>
+                        <button type="button" onclick="ChangeMobile()" style="float: right;"
+                        class="btn btn-warning mt-2 ms-3 ">
+                            تغییر شماره موبایل
+                        </button>
+
+                    </div>
+                }
+            }
+
+
+            <div class="continue-shopping col-9 col-sm-6 col-md-5 mx-auto d-none">
+                <a asp-controller="Order" asp-action="ContinueShopping" class="btn btn-success ">ادامه فرایند خرید</a>
+            </div>
+        </div>
+
+
+    </div>
+    <br>
+
+</div>
+
+
+<script src="lib/shopping-Basket-Panel.js"></script>
+<script>
+
+</script>

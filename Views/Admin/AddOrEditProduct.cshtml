@@ -1,0 +1,92 @@
+﻿@using SobhanJuice.Models
+@model Product
+@{
+    ViewData["Title"] = "AddOrEditProduct";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div class="main col-md-9">
+    <form id="productForm" class="mt-5 mx-5" action="/admin/AddOrEditProduct" method="post">
+        <input type="number" hidden name="Id" value="@Model.ID" />
+        <div class="form-group mb-2">
+            <label class="mb-1" for="productName">نام محصول</label>
+            @Html.TextBoxFor(m=>Model.Name,new {id= "productName",@class= "form-control",value=Model.Name,required="required" })
+        </div>
+        <div class="form-group mb-2">
+            <label class="mb-1" for="description">توضیحات محصول</label>
+            @Html.TextBoxFor(m => Model.Description, new { id = "description", @class = "form-control", value =Model.Description })
+        </div>
+        <div class="form-group mb-2">
+            <label class="mb-1" for="price"> قیمت بدون تخفیف</label>
+            @Html.TextBoxFor(m => Model.Price, new { id = "price", @class = "form-control", value = Model.Price,required="required" })
+        </div>
+        <div class="form-group mb-2">
+            <label class="mb-1" for="Box"> هزینه ظرف</label>
+            @Html.TextBoxFor(m => Model.Box, new { id = "Box", @class = "form-control", value = Model.Box,required="required" })
+        </div>
+        <div class="form-check">
+            @Html.CheckBoxFor(m => Model.ConsiderBoxPrice, new { @class = "form-check-input", id = "ConsiderBoxPrice",
+            @checked=Model.ConsiderBoxPrice })
+            <label class="form-check-label" for="exampleCheck1">در نظر گرفتن هزینه ظرف</label>
+
+        </div>
+        <div class="form-group mb-4">
+            <label class="mb-1" for="discount"> درصد تخفیف</label>
+            @Html.TextBoxFor(m => Model.Discount, new { id = "discount", @class = "form-control", value = Model.Discount,required="required"
+            })
+        </div>
+        <div class="form-group mb-4">
+            <label class="mb-1" for="Sequence"> ترتیب</label>
+            @Html.TextBoxFor(m => Model.Sequence, new { id = "Sequence", @class = "form-control", value = Model.Sequence,required="required"
+            })
+        </div>
+
+        <div class="form-group mb-2">
+            <select name="categoryId" class="form-control">
+                @foreach (var item in (List<Category>)ViewBag.categories)
+                {
+                    @if (item.ID == Model.CategoryId)
+                    {
+                        <option selected value="@item.ID">@item.Name </option>
+                    }
+                    else
+                    {
+                        <option value="@item.ID">@item.Name </option>
+
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-check">
+            @Html.CheckBoxFor(m => Model.Exist, new { @class = "form-check-input", id = "exampleCheck1",
+            @checked=Model.Exist })
+            <label class="form-check-label" for="exampleCheck1">موجود</label>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlFile1">عکس محصول :</label>
+            <input type="text" id="imgBase64" name="imgBase64"  hidden>
+            <input type="file" id="exampleFormControlFile1" name="Image"  onchange="getImageFromFile()"
+                class="form-control-file">
+        </div>
+        <button  onclick="submitProduct()" type="submit" class="btn btn-success px-5 mt-3">ثبت</button>
+
+    </form><br><br>
+    @if (Model.ID == 0)
+    {
+        <img src="" id="productimg" alt="" style="width: 150px;">
+    }
+    else
+    {
+        <img src="@System.Text.Encoding.Default.GetString(Model.Picture)" id="productimg" alt="" style="width: 150px;">
+    }
+    <br /><br /><br /><br /><br /><br /><br />
+</div>
+
+<script>
+    function submitProduct(){
+        if($('#productimg').attr('src')==''){
+            alert('عکس محصول را انتخاب کنید');
+        }
+    }
+</script>

@@ -1,0 +1,24 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Login</title>
+</head>
+<body>
+      <form dir="rtl" class="col-8 col-md-4 mx-auto" asp-action="Login" asp-controller="Admin" method="post" id="adminForm">
+        <div  class="form-group ">
+            <input class="form-control m-3" name="username" id="username" placeholder="نام کاربری" />
+            <input type="password" class="form-control m-3" name="password" id="password" placeholder="کلمه عبور " />
+            <button type="submit"  class="btn btn-primary">ورود</button>
+        </div>
+    </form>
+</body>
+</html>

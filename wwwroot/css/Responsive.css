@@ -1,0 +1,30 @@
+@media (min-width: 991px) {}
+
+@media (max-width: 990px) {
+    .pageContentItem ul {
+        width: 41rem;
+        text-align: right;
+    }
+    .pageContentItem ul li {
+        margin-top: 1rem;
+        margin-right: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .walet-menu {
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 657px) {
+    .pageContentItem ul {
+        width: 18rem;
+    }
+    .pageContentItem ul li {
+        margin-top: 1rem;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 575px) {}

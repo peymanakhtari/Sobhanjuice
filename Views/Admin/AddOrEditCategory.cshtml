@@ -1,0 +1,50 @@
+﻿@model SobhanJuice.Models.Category
+
+@{
+    ViewData["Title"] = "AddOrEditCategory";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="main col-md-9 mt-5">
+    <form asp-action="AddOrEditCategory">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group" hidden>
+            <label asp-for="ID" class="control-label"></label>
+            <input asp-for="ID" class="form-control" />
+            <span asp-validation-for="ID" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Name" class="control-label">عنوان</label>
+            <input autocomplete="off" asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Code" class="control-label">کد</label>
+            <input style="text-align: right;" dir="rtl" asp-for="Code" class="form-control" />
+            <span asp-validation-for="Code" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Picture" class="control-label">عکس</label>
+            <input id="imgBase64" name="imgBase64" type="text" hidden>
+            <input id="exampleFormControlFile1" type="file" class="form-control"
+                onchange="getImageFromFileCategory()" />
+            <span asp-validation-for="Picture" class="text-danger"></span>
+        </div>
+        <br>
+        <div class="form-group">
+            <input type="submit" value="ثبت" class="btn btn-primary" />
+        </div>
+    </form>
+    <div>
+        <a class="btn btn-secondary mt-2" asp-action="Categories">بازگشت</a>
+    </div>
+    @if (@Model.ID == 0)
+    {
+        <img style="width: 200px;" id="productimg" src="" alt="">
+    }
+    else
+    {
+        <img style="width: 200px;" id="productimg" src="@System.Text.Encoding.Default.GetString(Model.Picture)" alt="">
+    }
+</div>
+

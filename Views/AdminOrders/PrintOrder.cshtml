@@ -1,0 +1,71 @@
+﻿@model SobhanJuice.Models.OrderModel
+@using SobhanJuice.Utilities
+@{
+    ViewData["Title"] = "Print";
+    Layout = null;
+    var Utility=new Utility();
+    int TotalPrice=Model.Order.TotalPrice *10;
+}
+
+
+@*<div dir="rtl" class="col-12 col-md-9 mt-5 ms-3" style="border: 2px;">
+*@
+
+@*@Model[0].Order.User.Name
+*@
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+
+    }
+</style>
+<div id="faktor">
+<p style="width: 200px;" dir="rtl">  @Utility.DateBuilder(@Model.Order.DateTime.ToShamsi()) &nbsp;&nbsp; @Utility.TimeBuilder(@Model.Order.DateTime.ToShamsi())</p>
+<p style="width: 200px" dir="rtl">مشترک گرامی : @Model.Order.User.Name</p>
+<p style="width: 200px" dir="rtl"> موبایل : @Model.Order.User.Mobile</p>
+<p style="width: 200px" dir="rtl"> آدرس : @Model.Address.Text</p>
+<table style="width: 200px">
+    <thead>
+        <tr>
+            <th>قیمت</th>
+            <th>تعداد</th>
+            <th>فی</th>
+            <th>نام کالا</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Details)
+        {
+            int price = item.Count * item.Product.FinalPrice;
+            <tr>
+                <td>@price</td>
+                <td>@item.Count</td>
+                <td>@item.Product.FinalPrice</td>
+                <td dir="rtl">@item.Product.Name</td>
+            </tr>
+        }
+    </tbody>
+    
+</table>
+<p style="width: 200px" dir="rtl">مجموع : @Model.Order.Price</p>
+<p style="width: 200px" dir="rtl">هزینه ظرف : @Model.Order.BoxPrice</p>
+<p style="width: 200px" dir="rtl">هزینه ارسال : @Model.Order.DeliveryPrice</p>
+<p style="width: 200px" dir="rtl">قابل پرداخت :  @Model.Order.TotalPrice</p>
+<p style="width: 200px" dir="rtl">زمان تحویل : @Model.Order.Duration دقیقه</p>
+
+</div>
+
+
+<br><br><br><br>
+<button  style="position: absolute;right:1rem;top:1rem;background-color: red;color:white;padding: 1rem;font-size: 1.5rem" onclick="printpage()">پرینت</button>
+<button  style="position: absolute;right:1rem;top:6rem;background-color: gray;color:white;padding: 1rem;font-size: 1rem" onclick="history.back()">بازگشت</button>
+<script>
+    function printpage(){
+        debugger
+        window.print();
+    }
+</script>
